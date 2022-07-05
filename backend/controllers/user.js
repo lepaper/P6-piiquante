@@ -37,7 +37,7 @@ const User = require('../models/user');
                 return res.status(401).json({ error: 'Mot de passe incorrect !' });
               }
             else{
-              console.table(req.body);
+              /*console.table(req.body);*/
               let token = jwt.sign(
                 {userId: user._id},
                 process.env.SECRET_TOKEN,
@@ -46,14 +46,7 @@ const User = require('../models/user');
             res.status(200).json({
                 userId: user._id,
                 token: token
-              /*res.status(200).json({
-                userId: user._id,
-                token: jwt.sign(
-                  {userId: user._id},
-                'RANDOM_TOKEN_SECRET',
-                  { expireIn: '24h'}
-              )*/
-            
+              
               });
             }
           })
