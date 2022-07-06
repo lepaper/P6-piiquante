@@ -1,12 +1,15 @@
 const express = require('express');
 /*const bodyParser = require('body-parser');*/
 /*const helmet = require('helmet');*/
-const app = express();
+/*const app = express();*/
 
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
+
+const app = express();
 
 mongoose.connect('mongodb+srv://domi3:domi3do2607@cluster0.d7n5y.mongodb.net/Piiquante?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true })

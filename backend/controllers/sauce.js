@@ -11,7 +11,7 @@ exports.createSauce = (req, res, next) => {
   dislikes: 0,
   usersLiked: [],
   usersDisliked: [],
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   });
   sauce.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
@@ -27,7 +27,8 @@ exports.getOneSauce = (req, res, next) => {
 };
 
 exports.getAllSauce = (req, res, next) => {
-  Sauce.find().then(
+  Sauce.find()
+  .then(
     (sauces) => {
       res.status(200).json(sauces);
     }
