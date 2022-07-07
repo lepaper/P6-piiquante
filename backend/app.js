@@ -12,7 +12,7 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-mongoose.connect(process.env.SECRET_DB,/*'mongodb+srv://domi3:domi3do2607@cluster0.d7n5y.mongodb.net/Piiquante?retryWrites=true&w=majority',*/
+mongoose.connect(process.env.SECRET_DB,
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
