@@ -4,6 +4,7 @@ const express = require('express');
 /*const app = express();*/
 
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const path = require('path');
 require('dotenv').config();
 const sauceRoutes = require('./routes/sauce');
@@ -16,7 +17,7 @@ mongoose.connect('mongodb+srv://domi3:domi3do2607@cluster0.d7n5y.mongodb.net/Pii
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-/*app.use(helmet());*/
+app.use(helmet());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
