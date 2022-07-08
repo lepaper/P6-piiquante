@@ -1,15 +1,17 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+/*const cryptojs = require('crypto-js');*/
+require('dotenv').config();
 
 
   exports.signup = (req, res, next) => {
-
+    /*const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);*/
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({
-          /*email: hashedEmail,*/
-          email: req.body.email,
+          email: hashedEmail,
+          /*email: req.body.email,*/
           password: hash
         });
         user.save()
