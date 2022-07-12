@@ -1,7 +1,4 @@
 const express = require('express');
-/*const bodyParser = require('body-parser');*/
-/*const helmet = require('helmet');*/
-/*const app = express();*/
 
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -17,7 +14,10 @@ mongoose.connect(process.env.SECRET_DB,
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-app.use(helmet());
+app.use(helmet({
+   crossOriginResourcePolicy: false,
+})
+);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
