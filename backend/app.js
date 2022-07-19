@@ -9,7 +9,7 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-mongoose.connect(process.env.SECRET_DB,
+mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PWD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
