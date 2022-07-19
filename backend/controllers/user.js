@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-/*const cryptojs = require('crypto-js');*/
+const rateLimit = require('express-rate-limit')
+
 require('dotenv').config();
 
 
@@ -39,7 +40,7 @@ require('dotenv').config();
                 return res.status(401).json({ error: 'Mot de passe incorrect !' });
               }
             else{
-              /*console.table(req.body);*/
+              console.table(req.body);
               let token = jwt.sign(
                 {userId: user._id},
                 process.env.SECRET_TOKEN,
