@@ -104,11 +104,11 @@ exports.likeDislikeSauce = (req, res, next) => {
         break;
 
       case 0 :
-        if(sauce.usersLiked.includes(userId) && !sauce.usersDisliked.includes(userId)){
-          sauce.usersLiked.pull(userId)
+        if(sauce.usersLiked.includes(userId)){
+          sauce.usersLiked = sauce.usersLiked.filter(item => item != userId)
         }
-        if(!sauce.usersLiked.includes(userId) && sauce.usersDisliked.includes(userId)){
-          sauce.usersDisliked.pull(userId)
+        if( sauce.usersDisliked.includes(userId)){
+          sauce.usersDisliked = sauce.usersDisliked.filter(item => item != userId)
         }
 
               // Sauce.findOne({ _id: sauceId })
@@ -137,14 +137,14 @@ exports.likeDislikeSauce = (req, res, next) => {
         break;
         
         default:
-          console.log(error);
+          res.status(400).json({ message : 'Bad request'});
     }
     sauce.likes = sauce.usersLiked.lenght;
     sauce.dislikes = sauce.usersDisliked.lenght;
-
+console.log(sauce.usersLiked.lenght);
     sauce.save()
-    .then(res.status(200).json({ message: "Sauce modifiée"}))
-    .catch(error => res.status(401).json({ error }))
+    .then(mysauce => res.status(200).json({ message: "Sauce notée"}))
+    .catch(error => res.status(404).json({ error }))
   })
   .catch(error => res.status(400).json({ error }));
 };
