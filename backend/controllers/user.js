@@ -2,17 +2,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const rateLimit = require('express-rate-limit')
+//const pwdValidator = require('password-validator')
 
 require('dotenv').config();
 
-
   exports.signup = (req, res, next) => {
-    /*const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);*/
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({
-          email: hashedEmail,
-          /*email: req.body.email,*/
+          email: req.body.email,
           password: hash
         });
         user.save()
@@ -23,8 +21,6 @@ require('dotenv').config();
       .catch(error => res.status(500).json({ error }));
   
   };
-
-  
 
   exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
@@ -57,4 +53,10 @@ require('dotenv').config();
         }
       })
       .catch(error => res.status(500).json({ error }));
+      const limiter = rateLimit({
+        max: 100,
+        windowMs: 60 * 60 * 1000,
+        message: "Trop de requêtes de cette IP"
+      });
+      app.use(limiter);
   };

@@ -10,8 +10,8 @@ exports.createSauce = (req, res, next) => {
   userId: req.token.userId,
   likes: 0,
   dislikes: 0,
-  usersLiked: [' '],
-  usersDisliked: [' '],
+  usersLiked: [],
+  usersDisliked: [],
   imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   });
   sauce.save()
@@ -139,9 +139,9 @@ exports.likeDislikeSauce = (req, res, next) => {
         default:
           res.status(400).json({ message : 'Bad request'});
     }
-    sauce.likes = sauce.usersLiked.lenght;
-    sauce.dislikes = sauce.usersDisliked.lenght;
-console.log(sauce.usersLiked.lenght);
+    sauce.likes = sauce.usersLiked.length;
+    sauce.dislikes = sauce.usersDisliked.length;
+// console.log(sauce.usersLiked.length);
     sauce.save()
     .then(mysauce => res.status(200).json({ message: "Sauce notée"}))
     .catch(error => res.status(404).json({ error }))
