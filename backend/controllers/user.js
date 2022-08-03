@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-//const rateLimit = require('express-rate-limit')
-//const pwdValidator = require('password-validator')
 
 require('dotenv').config();
 
@@ -53,10 +51,5 @@ require('dotenv').config();
         }
       })
       .catch(error => res.status(500).json({ error }));
-      // const limiter = rateLimit({
-      //   max: 100,
-      //   windowMs: 60 * 60 * 1000,
-      //   message: "Trop de requêtes de cette IP"
-      // });
-      // app.use(limiter);
+      
   };
